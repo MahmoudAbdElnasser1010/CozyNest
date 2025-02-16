@@ -56,6 +56,7 @@ export default function Navbar() {
 
           {userToken && (
             <div className="hidden lg:flex lg:gap-x-2 capitalize">
+
               <NavLink to={"home"} className=" font-medium text-gray-900">
                 home
               </NavLink>
@@ -68,6 +69,8 @@ export default function Navbar() {
               </NavLink>
               <NavLink to={"products"} className=" font-medium text-gray-900">
                 products
+              </NavLink> <NavLink to={"allorders"} className=" font-medium text-gray-900">
+                Orders
               </NavLink>
             </div>
           )}
@@ -162,7 +165,9 @@ export default function Navbar() {
                     className="block rounded-lg  text-base/7 font-medium text-gray-900 hover:bg-gray-50"
                   >
                     products
-                  </NavLink>
+                  </NavLink> 
+                  
+               
                 </div>
                 <div className="py-6">
                   <NavLink

@@ -1,18 +1,34 @@
-import React from 'react'
-import style from './Brands.module.css'
-import { useDispatch, useSelector } from 'react-redux'
-import { increase, increaseByNum, decrease } from '../../redux/counteSlice';
+import React, { useEffect, useState } from 'react'
+import axios from 'axios';
+
 
 export default function Brands() {
+  const [data, setData] = useState([]);
 
-  let {count} = useSelector((store) => store.counterReducer)
-  let dispatch = useDispatch();
+ async function getBrands(){
+  let {data} = await axios.get('https://ecommerce.routemisr.com/api/v1/brands');
+  setData(data.data);
+  console.log(data.data);
+  
+ }
+
+ useEffect(() => {
+  getBrands();
+ }, [])
   
   return <>
-    <h2>Brands {count}</h2>
-    <button onClick={() => dispatch(increase())}>Increase</button>
-    <button onClick={() => dispatch(decrease())}>Decrease</button>
-    <button onClick={() => dispatch(increaseByNum(10))}>Increase by 10</button>
+  <div className='flex flex-wrap justify-center'>
+
+    {data.map((brand) => (
+      <div key={brand._id} className='w-1/6 shadow-md m-4 p-4 text-center rounded-lg'>
+       <img src={brand.image}/>
+        <h3>{brand.name}</h3> 
+       </div>
+     
+    ))}
+  </div>
+
+   
   
   </>
 }
