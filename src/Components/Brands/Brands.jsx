@@ -20,9 +20,9 @@ export default function Brands() {
   <div className='flex flex-wrap justify-center'>
 
     {data.map((brand) => (
-      <div key={brand._id} className='w-1/6 shadow-md m-4 p-4 text-center rounded-lg'>
+      <div key={brand._id} className='flex justify-center w-full md:w-1/6 shadow-md m-4 p-4 text-center rounded-lg'>
        <img src={brand.image}/>
-        <h3>{brand.name}</h3> 
+       
        </div>
      
     ))}

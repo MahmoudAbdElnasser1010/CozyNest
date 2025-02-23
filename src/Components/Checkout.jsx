@@ -29,7 +29,9 @@ export default function Checkout() {
     location.href = data.session.url;
    }   
   return <>
-  <form onSubmit={formik.handleSubmit} className="max-w-md mx-auto">
+  <section>
+
+  <form onSubmit={formik.handleSubmit} className="max-w-md mx-auto h-96">
         <div className="grid md:grid-cols-1 md:gap-4">
           <div className="relative z-0 w-full mb-5 group">
             <input
@@ -100,5 +102,6 @@ export default function Checkout() {
           Proceed to Checkout
         </button>
       </form>
+  </section>
   </>
 }

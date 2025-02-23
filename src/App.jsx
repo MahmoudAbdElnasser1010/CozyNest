@@ -21,6 +21,12 @@ import { store } from "./redux/store.js";
 import { Provider } from "react-redux";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import ForgetPassword from "./ForgetPassword.jsx";
+import Verify from "./Components/Verify.jsx";
+import ResetPassword from "./Components/ResetPassword.jsx";
+import Wishlist from "./Components/Wishlist.jsx";
+import WishlistContextProvider from "./stores/WishlistContext.jsx";
+
 
 const query = new QueryClient();
 
@@ -39,6 +45,10 @@ let routers = createBrowserRouter([
       { path: "checkout", element: <ProtectedRoute ><Checkout /></ProtectedRoute> },
       { path: "allorders", element: <ProtectedRoute ><AllOrders /></ProtectedRoute> },
       { path: "products", element: <ProtectedRoute ><Products /> </ProtectedRoute>},
+      { path: "wishlist", element: <ProtectedRoute ><Wishlist /> </ProtectedRoute>},
+      { path: "forgetpassword", element: <ForgetPassword />},
+      { path: "verify", element: <Verify />},
+      { path: "resetpassword", element: <ResetPassword />},
       
       { path: "*", element: <NotFound /> },
     ],
@@ -50,6 +60,7 @@ function App() {
     <QueryClientProvider client={query}>
 
       <Provider store={store}>
+        <WishlistContextProvider>
       <CartContextProvider>
       <UsersContextProvider>
         <RouterProvider router={routers}></RouterProvider>
@@ -57,6 +68,7 @@ function App() {
         <Toaster />
       </UsersContextProvider>
       </CartContextProvider>
+      </WishlistContextProvider>
       </Provider>
     </QueryClientProvider>
     </>

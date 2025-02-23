@@ -20,16 +20,16 @@ export default function MainSlider() {
   return <>
   
   <div className='flex w-full'>
-    <div className='w-3/4'>
+    <div className='w-full md:w-3/4'>
     <Slider {...settings}>
        <img src={Slide1} alt='Slider-image' className='h-[400px] object-cover'/>
        <img src={Slide2} alt='Slider-image' className='h-[400px] object-cover'/>
        <img src={Slide3} alt='Slider-image' className='h-[400px] object-cover'/>
         </Slider>
     </div>
-    <div className='w-1/4'>
-    <img src={Banner1} alt='Banner' className='h-[200px]'/>
-    <img src={Banner2} alt='Banner' className='h-[200px]'/>
+    <div className=' hidden md:w-1/4 md:block'>
+    <img src={Banner1} alt='Banner' className=' w-full h-[200px] sm:object-cover'/>
+    <img src={Banner2} alt='Banner' className=' w-full h-[200px] sm:object-cover'/>
     </div>
   </div>
   </>

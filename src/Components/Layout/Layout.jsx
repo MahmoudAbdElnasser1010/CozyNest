@@ -10,7 +10,7 @@ export default function Layout() {
 
 		<Navbar />
 
-		<div className="container mt-4 p-20 ">
+		<div className="mt-32 min-h-screen">
 
 			<Outlet></Outlet>
 		</div>

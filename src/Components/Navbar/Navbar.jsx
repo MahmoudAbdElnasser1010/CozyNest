@@ -1,9 +1,10 @@
 import React, { useContext, useState } from "react";
 import style from "./Navbar.module.css";
-import logo from "../../assets/images/freshcart-logo.svg";
+import logo from "../../assets/CozyNest.svg";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { UsersContext } from "../../stores/UsersContext";
 import { CartContext } from "../../stores/CartContext";
+import Dropdown from "../Dropdown";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -23,11 +24,11 @@ export default function Navbar() {
     <>
       <header className="bg-gray-200 fixed inset-x-0 top-0 z-50">
         <nav
-          className="flex items-center justify-between px-6 py-3 lg:px-8"
+          className="flex items-center justify-between px-6 py-5 lg:px-8 bg-white"
           aria-label="Global"
         >
           <Link to={"home"} className="lg:pe-4">
-            <span className="sr-only">Your Company</span>
+            <span className="sr-only"></span>
             <img className="" src={logo} width={120} alt="" />
           </Link>
           <div onClick={() => setIsOpen(true)} className="flex lg:hidden">
@@ -57,34 +58,43 @@ export default function Navbar() {
           {userToken && (
             <div className="hidden lg:flex lg:gap-x-2 capitalize">
 
-              <NavLink to={"home"} className=" font-medium text-gray-900">
+              <NavLink to={"home"} className="font-medium text-gray-500">
                 home
               </NavLink>
             
-              <NavLink to={"brands"} className=" font-medium text-gray-900">
+              <NavLink to={"brands"} className=" font-medium text-gray-500">
                 brands
               </NavLink>
-              <NavLink to={"categories"} className=" font-medium text-gray-900">
+              
+              <NavLink to={"categories"} className=" font-medium text-gray-500">
                 categories
               </NavLink>
-              <NavLink to={"products"} className=" font-medium text-gray-900">
+              <NavLink to={"products"} className=" font-medium text-gray-500">
                 products
-              </NavLink> <NavLink to={"allorders"} className=" font-medium text-gray-900">
+              </NavLink> <NavLink to={"allorders"} className=" font-medium text-gray-500">
                 Orders
               </NavLink>
             </div>
           )}
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end space-x-3"> 
+          
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end space-x-3 items-center gap-2"> 
           <NavLink to={"cart"} className=" font-medium text-gray-900">
-               <i className="fas fa-shopping-cart"></i>  <span>{cart?.numOfCartItems ?? 0}</span>
+                
+               <i className="fas fa-shopping-cart"></i>  <span>{userToken ? cart?.numOfCartItems : 0}</span>
               </NavLink>  
-            {userToken ? <span className=" font-medium text-gray-900" onClick={() => logout()}>Log Out</span> : 
+              <NavLink to={"wishlist"} className=" font-medium text-gray-900 flex gap-2 items-center">
+                
+              <i className="fa-solid fa-heart text-black"></i><span className="text-gray-900">Wishlist</span>
+              </NavLink>  
+            {userToken ?<Dropdown /> : 
             <>
+
+            
              <NavLink to={"/"} className=" font-medium text-gray-900">
                   Register
                 </NavLink>
                 <NavLink to={"login"} className=" font-medium text-gray-900">
-                  Login <span aria-hidden="true">→</span>
+                  Login <span aria-hidden="true"></span>
                 </NavLink>
             </>
             }

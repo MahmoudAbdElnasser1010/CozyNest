@@ -6,10 +6,12 @@ import Loading from './Loading';
 import { CartContext } from '../stores/CartContext';
 import { useQuery } from '@tanstack/react-query';
 import useProducts from '../hooks/useProducts';
+import { WishlistContext } from '../stores/WishlistContext';
 
 
 export default function RecentProducts() {
     const {addItemToCart} = useContext(CartContext);
+    const {addItemToWishlist, wishlistProducts, removeItemToWishlist, getWishlistProducts} = useContext(WishlistContext);
     //  const[products, setProducts] = useState([]);
     //  const[isLoading, setIsLoading] = useState(true);
     //   useEffect(() => {
@@ -22,15 +24,23 @@ export default function RecentProducts() {
     //   }
 
     let {data, isLoading} = useProducts();
+     useEffect(() => {
+        getWishlistProducts()
+      }, [wishlistProducts])
   return (
     <>
       {isLoading ? (
         <Loading />
       ) : (
-        <div className="flex flex-wrap gap-y-4 py-8 justify-center">
+        <div className=" flex flex-col md:flex-row flex-wrap gap-y-4 py-8 justify-center ">
           {data.data.data.map((product) => (
-            <div key={product.id} className="w-1/6 p-4">
-              <div className="product p-2 rounded-lg">
+            <div key={product.id} className="w-full md:w-1/6 p-4">
+              <div className="product p-2 rounded-lg relative">
+                {wishlistProducts?.find((wishlistedProduct) => wishlistedProduct.id === product.id) ? (
+
+                  <div onClick={() => removeItemToWishlist(product.id)} className='absolute top-2 right-2 cursor-pointer'><i className="fa-solid fa-heart text-black"></i></div>
+                ) :  <div onClick={() => addItemToWishlist(product.id)} className='absolute top-2 right-2 cursor-pointer'> <i className="fa-regular fa-heart "></i> </div>}
+             
                 <Link to={`/productdetails/${product.id}`}>
                   <img
                     src={product.imageCover}
